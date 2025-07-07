@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>My ERD</title>
   <!-- Подключаем CDN для vuerd -->
-  <script src="https://cdn.jsdelivr.net/npm/vuerd@latest/dist/vuerd.min.js"></script>
+  <script src="https://unpkg.com/vuerd@latest/dist/vuerd.min.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -24,32 +24,33 @@
   <!-- Скрипт для инициализации vuerd после полной загрузки страницы -->
   <script>
     window.onload = function() {
-      // Проверка на наличие глобальной переменной vuerd
-      if (typeof Vuerd !== 'undefined') {
-        const doc = {
-          tables: [
-            {
-              name: "save_mode_stop_list",
-              comment: "Список стоп слов",
-              columns: [
-                { name: "word", comment: "Стоп слово", dataType: "VARCHAR(255)" },
-                { name: "group", comment: "Группа", dataType: "VARCHAR(255)" },
-                { name: "created", comment: "Создано", dataType: "DATE" },
-                { name: "updated_at", comment: "Обновлено", dataType: "TIMESTAMP", default: "NOW()" },
-                { name: "deleted_at", comment: "Софт-делит", dataType: "TIMESTAMP" }
-              ]
-            }
-          ],
-          relations: []
-        };
-
-        new Vuerd({
-          target: document.getElementById("vuerd"),
-          props: { doc }
-        });
-      } else {
-        console.error("Vuerd script not loaded properly.");
-      }
+      setTimeout(function() {
+        if (typeof Vuerd !== 'undefined') {
+          const doc = {
+            tables: [
+              {
+                name: "save_mode_stop_list",
+                comment: "Список стоп слов",
+                columns: [
+                  { name: "word", comment: "Стоп слово", dataType: "VARCHAR(255)" },
+                  { name: "group", comment: "Группа", dataType: "VARCHAR(255)" },
+                  { name: "created", comment: "Создано", dataType: "DATE" },
+                  { name: "updated_at", comment: "Обновлено", dataType: "TIMESTAMP", default: "NOW()" },
+                  { name: "deleted_at", comment: "Софт-делит", dataType: "TIMESTAMP" }
+                ]
+              }
+            ],
+            relations: []
+          };
+  
+          new Vuerd({
+            target: document.getElementById("vuerd"),
+            props: { doc }
+          });
+        } else {
+          console.error("Vuerd script not loaded properly.");
+        }
+      }, 1000);  // Задержка 1 секунда
     };
   </script>
 </body>
