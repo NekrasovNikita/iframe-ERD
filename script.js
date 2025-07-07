@@ -2,26 +2,26 @@ import { createFromJson, createFromSQL } from '@dineug/erd-editor';
 
 let mode = 'json';  // Начальный режим
 
+// Переключение между режимами
 function switchMode(newMode) {
     mode = newMode;
     updateEditor();
 }
 
+// Обновление интерфейса в зависимости от выбранного режима
 function updateEditor() {
     const editor = document.getElementById('editor');
     
     if (mode === 'json') {
-        // Отображение поля для загрузки JSON
         editor.innerHTML = '<input type="file" accept=".json" onchange="loadFile(event)">';
     } else if (mode === 'sql') {
-        // Отображение поля для загрузки SQL
         editor.innerHTML = '<input type="file" accept=".sql" onchange="loadFile(event)">';
     } else if (mode === 'erd') {
-        // Визуализация ERD (потребуется сервер для генерации ERD, здесь будет iframe)
         editor.innerHTML = '<iframe src="https://your-server-url/generate-erd" width="100%" height="500px"></iframe>';
     }
 }
 
+// Загрузка файла и обработка данных
 function loadFile(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -32,6 +32,7 @@ function loadFile(event) {
     reader.readAsText(file);
 }
 
+// Генерация ERD диаграммы
 function generateERD(content) {
     const url = 'https://your-server-url/generate-erd';  // Ссылка на сервер для генерации диаграмм
     fetch(url, {
