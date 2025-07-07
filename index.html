@@ -1,57 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>My ERD</title>
-  <!-- Подключаем CDN для vuerd -->
-  <script src="https://cdn.jsdelivr.net/npm/vuerd@latest/dist/vuerd.min.js"></script>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-    }
-    #vuerd {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERD Visualizer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="vuerd"></div>
+    <div class="container">
+        <h1>ERD Visualizer</h1>
+        
+        <div class="buttons">
+            <button onclick="switchMode('json')">JSON</button>
+            <button onclick="switchMode('sql')">SQL</button>
+            <button onclick="switchMode('erd')">Visualize ERD</button>
+        </div>
+        
+        <div id="editor"></div>
+    </div>
 
-  <!-- Скрипт для инициализации vuerd после полной загрузки страницы -->
-  <script>
-    window.onload = function() {
-      setTimeout(function() {
-        if (typeof Vuerd !== 'undefined') {
-          const doc = {
-            tables: [
-              {
-                name: "save_mode_stop_list",
-                comment: "Список стоп слов",
-                columns: [
-                  { name: "word", comment: "Стоп слово", dataType: "VARCHAR(255)" },
-                  { name: "group", comment: "Группа", dataType: "VARCHAR(255)" },
-                  { name: "created", comment: "Создано", dataType: "DATE" },
-                  { name: "updated_at", comment: "Обновлено", dataType: "TIMESTAMP", default: "NOW()" },
-                  { name: "deleted_at", comment: "Софт-делит", dataType: "TIMESTAMP" }
-                ]
-              }
-            ],
-            relations: []
-          };
-  
-          new Vuerd({
-            target: document.getElementById("vuerd"),
-            props: { doc }
-          });
-        } else {
-          console.error("Vuerd script not loaded properly.");
-        }
-      }, 1000);  // Задержка 1 секунда
-    };
-  </script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
