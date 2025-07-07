@@ -17,6 +17,7 @@ function updateEditor() {
     } else if (mode === 'sql') {
         editor.innerHTML = '<input type="file" accept=".sql" onchange="loadFile(event)">';
     } else if (mode === 'erd') {
+        // Вставляем iframe для визуализации ERD с вашего сервера
         editor.innerHTML = '<iframe src="https://your-server-url/generate-erd" width="100%" height="500px"></iframe>';
     }
 }
@@ -34,7 +35,7 @@ function loadFile(event) {
 
 // Генерация ERD диаграммы
 function generateERD(content) {
-    const url = 'https://your-server-url/generate-erd';  // Ссылка на сервер для генерации диаграмм
+    const url = 'https://your-server-url/generate-erd';  // Убедитесь, что сервер работает по этому адресу
     fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -42,7 +43,8 @@ function generateERD(content) {
     })
     .then(response => response.json())
     .then(data => {
-        // Отображаем диаграмму (предполагается, что сервер вернёт HTML или данные для визуализации)
-        console.log(data);
+        // Обработка данных для отображения диаграммы
+        // В зависимости от ответа сервера можно обновить интерфейс
+        console.log(data);  // Показать данные в консоли, можно вставить графику или элементы
     });
 }
