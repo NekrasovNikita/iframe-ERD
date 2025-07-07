@@ -21,27 +21,31 @@
   <div id="vuerd"></div>
   <script>
     window.onload = function() {
-      const doc = {
-        tables: [
-          {
-            name: "save_mode_stop_list",
-            comment: "Список стоп слов",
-            columns: [
-              { name: "word", comment: "Стоп слово", dataType: "VARCHAR(255)" },
-              { name: "group", comment: "Группа", dataType: "VARCHAR(255)" },
-              { name: "created", comment: "Создано", dataType: "DATE" },
-              { name: "updated_at", comment: "Обновлено", dataType: "TIMESTAMP", default: "NOW()" },
-              { name: "deleted_at", comment: "Софт-делит", dataType: "TIMESTAMP" }
-            ]
-          }
-        ],
-        relations: []
-      };
-
-      new Vuerd({
-        target: document.getElementById("vuerd"),
-        props: { doc }
-      });
+      if (typeof Vuerd !== 'undefined') {
+        const doc = {
+          tables: [
+            {
+              name: "save_mode_stop_list",
+              comment: "Список стоп слов",
+              columns: [
+                { name: "word", comment: "Стоп слово", dataType: "VARCHAR(255)" },
+                { name: "group", comment: "Группа", dataType: "VARCHAR(255)" },
+                { name: "created", comment: "Создано", dataType: "DATE" },
+                { name: "updated_at", comment: "Обновлено", dataType: "TIMESTAMP", default: "NOW()" },
+                { name: "deleted_at", comment: "Софт-делит", dataType: "TIMESTAMP" }
+              ]
+            }
+          ],
+          relations: []
+        };
+  
+        new Vuerd({
+          target: document.getElementById("vuerd"),
+          props: { doc }
+        });
+      } else {
+        console.error("Vuerd script not loaded properly.");
+      }
     };
   </script>
 </body>
