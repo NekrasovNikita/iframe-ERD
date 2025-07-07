@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>My ERD</title>
+  <!-- Подключаем CDN для vuerd -->
   <script src="https://cdn.jsdelivr.net/npm/vuerd@latest/dist/vuerd.min.js"></script>
   <style>
     html, body {
@@ -19,8 +20,11 @@
 </head>
 <body>
   <div id="vuerd"></div>
+
+  <!-- Скрипт для инициализации vuerd после полной загрузки страницы -->
   <script>
     window.onload = function() {
+      // Проверка на наличие глобальной переменной vuerd
       if (typeof Vuerd !== 'undefined') {
         const doc = {
           tables: [
@@ -38,7 +42,7 @@
           ],
           relations: []
         };
-  
+
         new Vuerd({
           target: document.getElementById("vuerd"),
           props: { doc }
